@@ -26,7 +26,7 @@ const Signuppage = () => {
           });
       })
       .catch(function (error) {
-        console.log(error);
+       // console.log(error);
       });
     // const result = await signIn("credentials", {
     //     email: email.current,

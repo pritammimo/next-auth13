@@ -34,11 +34,11 @@ session: {
           body: JSON.stringify(credentialDetails),
         });
         const user = await resp.json();
-        console.log("user",user);
+      //  console.log("user",user);
         if (resp.ok) {
           return user;
         } else {
-          console.log("check your credentials");
+        //  console.log("check your credentials");
           return null;
         }
       },
@@ -46,7 +46,7 @@ session: {
   ],
 callbacks: {
   async jwt({ token, user }) {
-    console.log("user2",user);
+   // console.log("user2",user);
     // Persist the OAuth access_token and or the user id to the token right after signin
     if (user) {
       token.email = user.user.email;
