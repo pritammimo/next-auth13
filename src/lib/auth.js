@@ -1,6 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+export const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const authOptions = {
 session: {
     strategy: "jwt",
@@ -34,6 +34,7 @@ session: {
           body: JSON.stringify(credentialDetails),
         });
         const user = await resp.json();
+        console.log("user",user);
         if (resp.ok) {
           return user;
         } else {
@@ -45,6 +46,7 @@ session: {
   ],
 callbacks: {
   async jwt({ token, user }) {
+    console.log("user2",user);
     // Persist the OAuth access_token and or the user id to the token right after signin
     if (user) {
       token.email = user.user.email;

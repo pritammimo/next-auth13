@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 const AppBar = () => {
 const { data:session } = useSession();
-//const session = await getServerSession(authOptions)
+console.log("sessionval",session)
   return (
     <div className="bg-gradient-to-b from-cyan-50 to-cyan-200 p-2 flex gap-5 ">
       <Link className="text-sky-600 hover:text-sky-700" href={"/"}>
@@ -28,9 +28,14 @@ const { data:session } = useSession();
             </button>
           </>
         ) : (
+          <>
           <button className="text-green-600" onClick={() => signIn()}>
             Sign In
           </button>
+           <Link href="/auth/signup" className="text-green-600">
+           Sign Up
+         </Link>
+         </>
         )}
       </div>
     </div>
