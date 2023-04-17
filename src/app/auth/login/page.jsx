@@ -13,7 +13,6 @@ const LoginPage = () => {
   const pass = useRef("");
 
   const onSubmit = async () => {
-    console.log("hello world");
     const result = await signIn("credentials", {
       email: email.current,
       password: pass.current,

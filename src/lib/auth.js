@@ -51,6 +51,8 @@ callbacks: {
     if (user) {
       token.email = user.user.email;
       token.id = user.user.id;
+      token.name=user.user.name;
+      token.role=user.user.role;
       token.accessToken = user.accessToken
     }
     return token
@@ -59,7 +61,8 @@ callbacks: {
       if (token) {
         session.user.email = token.email;
         session.user.id = token.id;
-        session.user.name="pritam"
+        session.user.name=token.name;
+        session.user.role=token.role;
         session.user.accessToken = token.accessToken;
       }
       return session;
