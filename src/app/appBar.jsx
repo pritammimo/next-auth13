@@ -1,10 +1,13 @@
-
+'use client';
 import Link from "next/link";
 import React from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { authOptions } from "@/lib/auth";
 
-const AppBar = () => {
-//   const { data: session } = useSession();
-//   console.log({ session });
+const AppBar = async({session}) => {
+// const { data: session } = useSession();
+console.log("dara",{ session });
+//const session = await getServerSession(authOptions)
 
   return (
     <div className="bg-gradient-to-b from-cyan-50 to-cyan-200 p-2 flex gap-5 ">
@@ -19,14 +22,14 @@ const AppBar = () => {
         User Panel
       </Link>
       <div className="ml-auto flex gap-2">
-      <p className="text-sky-600"> Pritam</p>
-            <button className="text-red-500" >
+      {/* <p className="text-sky-600"> Pritam</p>
+            <button className="text-red-500" onClick={() => signOut()} >
               Sign Out
             </button>
-            <button className="text-green-600">
+            <button className="text-green-600" onClick={() => signIn()}>
             Sign In
-          </button>
-        {/* {session?.user ? (
+          </button> */}
+        {session?.user ? (
           <>
             <p className="text-sky-600"> {session.user.name}</p>
             <button className="text-red-500" onClick={() => signOut()}>
@@ -37,7 +40,7 @@ const AppBar = () => {
           <button className="text-green-600" onClick={() => signIn()}>
             Sign In
           </button>
-        )} */}
+        )}
       </div>
     </div>
   );
