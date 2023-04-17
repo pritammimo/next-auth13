@@ -34,8 +34,7 @@ session: {
           body: JSON.stringify(credentialDetails),
         });
         const user = await resp.json();
-        if (user) {
-
+        if (resp.ok) {
           return user;
         } else {
           console.log("check your credentials");
@@ -61,7 +60,6 @@ callbacks: {
         session.user.name="pritam"
         session.user.accessToken = token.accessToken;
       }
-      console.log("session",session);
       return session;
     },
   },

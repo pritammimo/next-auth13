@@ -2,13 +2,10 @@
 import Link from "next/link";
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { authOptions } from "@/lib/auth";
 
-const AppBar = async({session}) => {
-// const { data: session } = useSession();
-console.log("dara",{ session });
+const AppBar = () => {
+const { data:session } = useSession();
 //const session = await getServerSession(authOptions)
-
   return (
     <div className="bg-gradient-to-b from-cyan-50 to-cyan-200 p-2 flex gap-5 ">
       <Link className="text-sky-600 hover:text-sky-700" href={"/"}>
@@ -22,13 +19,7 @@ console.log("dara",{ session });
         User Panel
       </Link>
       <div className="ml-auto flex gap-2">
-      {/* <p className="text-sky-600"> Pritam</p>
-            <button className="text-red-500" onClick={() => signOut()} >
-              Sign Out
-            </button>
-            <button className="text-green-600" onClick={() => signIn()}>
-            Sign In
-          </button> */}
+          
         {session?.user ? (
           <>
             <p className="text-sky-600"> {session.user.name}</p>
