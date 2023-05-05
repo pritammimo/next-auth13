@@ -1,6 +1,8 @@
 "use client";
 import Button from "@/Components/elements/Button";
 import TextBox from "@/Components/elements/TextBox";
+import { backendURL } from "@/lib/auth";
+import axios from "axios";
 // import Button from "@elements/Button";
 // import TextBox from "@elements/TextBox";
 import { signIn } from "next-auth/react";
@@ -13,12 +15,35 @@ const LoginPage = () => {
   const pass = useRef("");
 
   const onSubmit = async () => {
-    const result = await signIn("credentials", {
+   await axios.post(backendURL + "/signin", {
       email: email.current,
       password: pass.current,
+    })
+    .then(function (response) {
+      const result = signIn("credentials", {
+      //   email: email.current,
+      //  password: pass.current,
+      accessToken:response?.data?.accessToken,
+       address:response?.data?.user?.address,
+       email: response?.data?.user?.email,
+       id: response?.data?.user?.id,
+      name: response?.data?.user?.name,
+      phone: response?.data?.user?.phone,
+      role: response?.data?.user?.role,
       redirect: true,
       callbackUrl: "/",
     });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  
+    // const result = await signIn("credentials", {
+    //   email: email.current,
+    //   password: pass.current,
+    //   redirect: false,
+    //   callbackUrl: "/",
+    // });
   };
   return (
     <div className={"flex flex-col justify-center items-center  h-screen bg-gradient-to-br gap-1 from-cyan-300 to-sky-600"}>

@@ -20,33 +20,42 @@ session: {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const credentialDetails = {
-          email: credentials.email,
-          password: credentials.password,
-        };
-
-        const resp = await fetch(backendURL + "/signin", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(credentialDetails),
-        });
-        const user = await resp.json();
-      //  console.log("user",user);
-        if (resp.ok) {
-          return user;
-        } else {
-        //  console.log("check your credentials");
-          return null;
+        let value= {
+          accessToken: credentials?.accessToken,
+          user: {
+            email: credentials?.email,
+            role: credentials?.role,
+            name: credentials?.name,
+            address: credentials?.address,
+            phone: credentials?.phone,
+            id: credentials?.id
+          }
         }
+
+        console.log("cred",value);
+        return value
+      //   const resp = await fetch(backendURL + "/signin", {
+      //     method: "POST",
+      //     headers: {
+      //       Accept: "application/json",
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(credentialDetails),
+      //   });
+      //   const user = await resp.json();
+      // console.log("user",user);
+      //   if (resp.ok) {
+      //     return user;
+      //   } else {
+      //   //  console.log("check your credentials");
+      //     return null;
+      //   }
       },
     }),
   ],
 callbacks: {
   async jwt({ token, user }) {
-   // console.log("user2",user);
+   console.log("user2",user);
     // Persist the OAuth access_token and or the user id to the token right after signin
     if (user) {
       token.email = user.user.email;
